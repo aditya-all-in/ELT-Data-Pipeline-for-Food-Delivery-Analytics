@@ -1,4 +1,4 @@
-# End-to-End ELT Data Pipeline for Food Delivery Analytics
+# ELT Data Pipeline for Food Delivery Analytics
 
 An end-to-end, production-grade batch ELT data pipeline simulating large-scale food delivery operations across millions of orders, catalog items, and unstructured customer feedback. Built with **Snowflake**, **dbt Core**, and **Apache Airflow**, following the **Medallion Architecture** and **Kimball Dimensional Modeling**.
 
