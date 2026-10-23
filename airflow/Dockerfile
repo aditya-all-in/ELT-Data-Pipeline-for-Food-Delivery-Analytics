@@ -1,14 +1,13 @@
-FROM apache/airflow:2.10.0-python3.10
+# Airflow 3.x image + Snowflake provider + FAB auth (for admin/admin login) + dbt venv + openai.
+# Bump the tag to the newest 3.x if you like (e.g. 3.0.4 / 3.1.x).
+FROM apache/airflow:3.0.3
 
-USER root
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends git && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-USER airflow
-# Install dbt-snowflake and relevant database drivers
+# Providers: snowflake (COPY task), fab (classic username/password login), openai (AI task).
 RUN pip install --no-cache-dir \
-    dbt-core==1.8.7 \
-    dbt-snowflake==1.8.3 \
-    apache-airflow-providers-snowflake==5.8.0
+      apache-airflow-providers-snowflake \
+      apache-airflow-providers-fab \
+      openai
+
+# dbt in its own venv so it never clashes with Airflow's deps. DAG calls /opt/airflow/dbt_venv/bin/dbt
+RUN python -m venv /opt/airflow/dbt_venv && \
+    /opt/airflow/dbt_venv/bin/pip install --no-cache-dir "dbt-snowflake==1.8.*"

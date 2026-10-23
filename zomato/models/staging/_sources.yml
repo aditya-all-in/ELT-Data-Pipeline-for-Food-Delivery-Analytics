@@ -1,7 +1,7 @@
 sources:
-  - name: raw
-    database: ZOMATO
-    schema: RAW
+  - name: raw # alias....ZOMATO.RAW
+    database: ZOMATO # database name on snowflake
+    schema: RAW # schema name on snowflake
 
     tables:
       - name: restaurants

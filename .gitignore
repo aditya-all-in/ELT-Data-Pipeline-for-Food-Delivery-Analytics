@@ -17,9 +17,20 @@ logs/
 .env
 *.env
 !*.env.example
+!.env.example
 
 # IDE & OS files
 .vscode/
 .idea/
 .DS_Store
 Thumbs.db
+
+# dbt credentials
+zomato/profiles.yml
+
+# Snowflake credentials
+zomato/models/staging/creds.txt
+zomato/.user.yml
+
+# Generated AI embeddings
+/review_embeddings.parquet
